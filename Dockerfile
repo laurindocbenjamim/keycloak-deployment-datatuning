@@ -9,7 +9,9 @@ ENV KC_METRICS_ENABLED=true
 WORKDIR /opt/keycloak
 
 # Executa o build para pré-configurar o servidor com suporte a Postgres
-RUN /opt/keycloak/bin/kc.sh build
+# No estágio de builder
+RUN /opt/keycloak/bin/kc.sh build --cache=local --db=postgres
+
 
 # ESTÁGIO 2: Runtime
 FROM quay.io/keycloak/keycloak:latest
@@ -21,6 +23,7 @@ ENV KC_PROXY_HEADERS=xforwarded
 ENV KC_HTTP_ENABLED=true
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HOSTNAME_STRICT_HTTPS=true
+ENV KC_CACHE=local
 
 # --- Configurações da Base de Dados ---
 ENV KC_DB=postgres
