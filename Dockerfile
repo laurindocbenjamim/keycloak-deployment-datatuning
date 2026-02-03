@@ -6,7 +6,6 @@ ENV KC_HOSTNAME_STRICT=false
 
 EXPOSE 8080
 
-# Script wrapper para garantir execução
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-CMD ["/start.sh"]
+# Use ENTRYPOINT para o comando base e CMD para argumentos
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
+CMD ["start-dev"]
