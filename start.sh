@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /opt/keycloak/bin/kc.sh start-dev
